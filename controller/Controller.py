@@ -37,3 +37,45 @@ class Controller:
         self.__repo.adauga_film(film)
         UI.display_film_added(film)
         return True
+
+
+    def modificare_film(self, id, titlu, descriere, gen):
+            film = self.__repo.get_film_by_id(id)
+            if type(film) != Film:
+                UI.display_missing_film_error(id)
+                return False
+            film.updateTitlu(titlu)
+            film.updateDescriere(descriere)
+            film.updateGen(gen)
+            self.__repo.updateFilmInList(film)
+            UI.display_film_updated(film)
+
+
+    def modificare_client(self, id, nume, cnp):
+        pass
+
+
+    def sterge_client(self, id):
+        pass
+
+
+    def cauta_film(self, titlu):
+        pass
+
+
+    def cauta_client(self, nume):
+        pass
+
+
+    def sterge_film(self, id):
+        film = self.__repo.get_film_by_id(id)
+        if type(film) != Film:
+            UI.display_missing_film_error(id)
+            return False
+        self.__repo.deleteFilmFromList(film)
+        UI.display_film_deleted_notification()
+
+
+    def display_all_films(self):
+        for film in self.__repo.get_lista_filme():
+            UI.display_film(film)

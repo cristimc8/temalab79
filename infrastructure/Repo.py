@@ -24,7 +24,22 @@ class Repo:
         for film in self.__listaFilme:
             if film.getId() == id:
                 return film
-        #raise defapt in controller
+        return False
+
+
+    def updateFilmInList(self, newFilm):
+        for index, film in enumerate(self.__listaFilme):
+            if film.getId() == newFilm.getId():
+                self.__listaFilme[index] = newFilm
+            
+
+    def deleteFilmFromList(self, filmToDelete):
+        idx = 0
+        for index, film in enumerate(self.__listaFilme):
+            if film.getId() == filmToDelete.getId():
+                idx = index
+                break
+        del(self.__listaFilme[idx])
 
 
     def get_lista_filme(self):

@@ -11,7 +11,7 @@ class Film:
 
     
     def __eq__(self, o: object) -> bool:
-        if self.getTitlu() == o.get_titlu(): return True
+        if self.getTitlu() == o.getTitlu(): return True
         return False
 
 

@@ -28,17 +28,40 @@ class UI:
 
 
     @staticmethod
-    def display_missing_film_error(film, err):
+    def display_missing_film_error(id):
         print('*' * 20)
-        print('Ne pare rau, dar nu avem {} in colectie!'
-        .format(film.getTitle()))
+        print('Ne pare rau, dar nu avem film cu id {} in colectie!'
+        .format(str(id)))
         print('*' * 20)
+
+    
+    @staticmethod
+    def display_film(film):
+        print('/' * 30)
+        print('Detalii {}:\nId:{}\nDescriere: {}\nGen: {}'
+        .format(film.getTitlu(), str(film.getId()), film.getDescriere(), film.getGen()))
+        print('/' * 30)
+
+
+    @staticmethod
+    def display_film_deleted_notification():
+        print('/' * 30)
+        print('Am sters cu succes titlul!')
+        print('/' * 30)
 
 
     @staticmethod
     def display_film_added(film):
         print('/' * 30)
         print('Am adaugat cu succes {} in colectia noastra!\nDetalii {}:\nId:{}\nDescriere: {}\nGen: {}'
+        .format(film.getTitlu(), film.getTitlu(), str(film.getId()), film.getDescriere(), film.getGen()))
+        print('/' * 30)
+
+
+    @staticmethod
+    def display_film_updated(film):
+        print('/' * 30)
+        print('Am modificat cu succes {} in colectia noastra!\nDetalii {}:\nId:{}\nDescriere: {}\nGen: {}'
         .format(film.getTitlu(), film.getTitlu(), str(film.getId()), film.getDescriere(), film.getGen()))
         print('/' * 30)
 

@@ -2,6 +2,8 @@ class Console:
     def __init__(self, controller):
         self.__user_input = ''
         self.__dict = {'adauga_client': controller.adaugare_client, 'adauga_film': controller.adaugare_film,
+        'modifica_film': controller.modificare_film, 'arata_filme': controller.display_all_films,
+        'sterge_film': controller.sterge_film,
         'out': exit}
 
 

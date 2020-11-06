@@ -23,4 +23,6 @@ class FilmAlreadyExists(Exception):
 
 
 class FilmNotFound(Exception):
-    pass
+    def __init__(self, message = 'Filmul cautat nu exista inca!'):
+        self.__message = message
+        super().__init__(self.__message)

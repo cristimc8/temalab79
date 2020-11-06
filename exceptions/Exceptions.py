@@ -10,8 +10,16 @@ class CnpNotValid(Exception):
         super().__init__(self.__message)
 
 
+class CnpAlreadyExists(Exception):
+    def __init__(self, message = 'CNP-ul este deja inregistrat!'):
+        self.__message = message
+        super().__init__(self.__message)
+
+
 class FilmAlreadyExists(Exception):
-    pass
+    def __init__(self, message = 'Filmul acesta exista deja!'):
+        self.__message = message
+        super().__init__(self.__message)
 
 
 class FilmNotFound(Exception):

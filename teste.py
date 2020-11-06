@@ -14,7 +14,7 @@ class Teste:
         descriere = "super tare"
         gen = "Actiune"
         film = Film(id, titlu, descriere, gen)
-        assert(film.get_id_film() == id)
-        assert(film.get_titlu() == titlu)
-        assert(film.get_descriere() == descriere)
-        assert(film.get_gen() == gen)
+        assert(film.getId() == id)
+        assert(film.getTitlu() == titlu)
+        assert(film.getDescriere() == descriere)
+        assert(film.getGen() == gen)

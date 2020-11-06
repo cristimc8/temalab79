@@ -17,3 +17,11 @@ class InstanceCounter:
     def getNewClientId(self):
         self.__client += 1
         return int(self.__client)
+
+    
+    def popClientId(self):
+        self.__client -= 1
+
+
+    def popFilmId(self):
+        self.__film -= 1

@@ -15,8 +15,13 @@ class Client:
         self.__cnp = cnp
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.__name)
+
+
+    def __eq__(self, o: object) -> bool:
+        if self.getCnp() == o.getCnp(): return True
+        return False
 
 
     def getId(self):

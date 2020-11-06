@@ -12,10 +12,24 @@ class Repo:
             print(str(client) + '\n')
 
 
-    def adauga_film(self):
-        pass
+    def adauga_film(self, film):
+        self.__listaFilme.append(film)
 
 
     def adauga_client(self, client):
         self.__listaClienti.append(client)
-        self.print_lista_clienti()
+
+
+    def get_film_by_id(self, id):
+        for film in self.__listaFilme:
+            if film.getId() == id:
+                return film
+        #raise defapt in controller
+
+
+    def get_lista_filme(self):
+        return self.__listaFilme
+
+    
+    def get_lista_clienti(self):
+        return self.__listaClienti

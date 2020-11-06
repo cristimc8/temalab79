@@ -6,22 +6,38 @@ class Film:
         self.__descriere = descriere
 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self)
-        #####
+
+    
+    def __eq__(self, o: object) -> bool:
+        if self.getTitlu() == o.get_titlu(): return True
+        return False
 
 
-    def get_id_film(self):
-        return self.__id_film
+    def getId(self) -> int:
+        return int(self.__id_film)
 
 
-    def get_titlu(self):
+    def getTitlu(self) -> str:
         return self.__titlu
 
     
-    def get_gen(self):
+    def getGen(self) -> str:
         return self.__gen
 
     
-    def get_descriere(self):
+    def getDescriere(self) -> str:
         return self.__descriere
+
+
+    def updateTitlu(self, newTitle):
+        self.__titlu = newTitle
+    
+
+    def updateDescriere(self, newDescriere):
+        self.__descriere = newDescriere
+
+
+    def updateGen(self, newGen):
+        self.__gen = newGen

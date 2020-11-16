@@ -7,7 +7,7 @@ class Film:
 
 
     def __str__(self) -> str:
-        return str(self)
+        return str(self.getTitlu())
 
     
     def __eq__(self, o: object) -> bool:

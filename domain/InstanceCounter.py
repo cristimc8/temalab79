@@ -10,13 +10,19 @@ class InstanceCounter:
 
 
     def getNewFilmId(self):
-        self.__film += 1
-        return int(self.__film)
+        return int(self.__film + 1)
 
     
     def getNewClientId(self):
+        return int(self.__client + 1)
+
+    
+    def updateLastFilmId(self):
+        self.__film += 1
+
+    
+    def updateLastClientId(self):
         self.__client += 1
-        return int(self.__client)
 
     
     def popClientId(self):

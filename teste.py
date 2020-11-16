@@ -18,3 +18,7 @@ class Teste:
         assert(film.getTitlu() == titlu)
         assert(film.getDescriere() == descriere)
         assert(film.getGen() == gen)
+
+
+    def __run_teste_client(self):
+        pass

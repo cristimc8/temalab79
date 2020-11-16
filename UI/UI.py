@@ -28,10 +28,14 @@ class UI:
 
 
     @staticmethod
-    def display_missing_film_error(id):
+    def afiseaza_inchirieri(lista):
+        print(lista)
+
+
+    @staticmethod
+    def display_missing_film_error(exc):
         print('*' * 20)
-        print('Ne pare rau, dar nu avem film cu id {} in colectie!'
-        .format(str(id)))
+        print(str(exc))
         print('*' * 20)
 
     
@@ -41,6 +45,13 @@ class UI:
         print('Detalii {}:\nId:{}\nDescriere: {}\nGen: {}'
         .format(film.getTitlu(), str(film.getId()), film.getDescriere(), film.getGen()))
         print('/' * 30)
+
+    
+    @staticmethod
+    def display_missing_client_error(exc):
+        print("*" * 20)
+        print(str(exc))
+        print("*" * 20)
 
 
     @staticmethod
@@ -74,9 +85,9 @@ class UI:
 
 
     @staticmethod
-    def CnpNotValid(cnp, err):
+    def CnpNotValid(err):
         print('*' * 20)
-        print('{}\n{}'.format(str(err), str(cnp)))
+        print('{}'.format(str(err)))
         print('*' * 20)
 
 

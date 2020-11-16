@@ -16,6 +16,12 @@ class CnpAlreadyExists(Exception):
         super().__init__(self.__message)
 
 
+class ClientNotFound(Exception):
+    def __init__(self, message = 'Clientul cautat nu exista!'):
+        self.__message = message
+        super().__init__(self.__message)
+
+
 class FilmAlreadyExists(Exception):
     def __init__(self, message = 'Filmul acesta exista deja!'):
         self.__message = message

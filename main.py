@@ -3,7 +3,8 @@ from UI.Console import Console
 from infrastructure.FilmRepo import FilmRepo
 from infrastructure.ClientRepo import ClientRepo
 from validare.Validare import Validare
-from controller.Controller import Controller
+from controller.ClientService import ClientService
+from controller.FilmService import FilmService
 
 
 if __name__ == "__main__":
@@ -12,6 +13,12 @@ if __name__ == "__main__":
     clientRepo = ClientRepo()
     filmRepo = FilmRepo()
     valid = Validare()
-    controller = Controller(valid, repo)
-    console = Console(controller)
+    clientService = ClientService(clientRepo, valid)
+    filmService = FilmService(filmRepo, valid)
+    console = Console(clientService, filmService)
     console.run()
+    
+    #Todo chestiile cu try except
+    #IN CONSOLE SCHIMBA METODA DE BATCH
+    #Sa ma gindesc la ceva cu inchirieri -- relatii antre obiecte
+    #Documentatie si scenarii de rulare

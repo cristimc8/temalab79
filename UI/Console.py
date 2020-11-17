@@ -1,11 +1,11 @@
 from UI.UI import UI
 from exceptions.Exceptions import *
 class Console:
-    def __init__(self, controller):
+    def __init__(self, clientService, filmService):
         self.__user_input = ''
-        self.__dict = {'adauga_client': controller.adaugare_client, 'adauga_film': controller.adaugare_film,
-        'modifica_film': controller.modificare_film, 'arata_filme': controller.display_all_films,
-        'sterge_film': controller.sterge_film, 'inchiriaza_film': controller.inchiriaza_film, 'inchirieri': controller.afiseaza_inchirieri,
+        self.__dict = {'adauga_client': clientService.adaugare_client, 'adauga_film': filmService.adaugare_film,
+        'modifica_film': filmService.modificare_film, 'arata_filme': filmService.display_all_films,
+        'sterge_film': filmService.sterge_film, 'inchiriaza_film': filmService.inchiriaza_film, 'inchirieri': filmService.afiseaza_inchirieri,
         'out': exit}
 
 

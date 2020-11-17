@@ -1,11 +1,13 @@
 from domain.Film import Film
 from domain.Client import Client
 from domain.InstanceCounter import InstanceCounter
-from infrastructure.Repo import Repo
+from infrastructure.FilmRepo import FilmRepo
+from infrastructure.ClientRepo import ClientRepo
 class Teste:
     def __init__(self) -> None:
         self.__ic = InstanceCounter()
-        self.__repo = Repo()
+        self.__clientRepo = ClientRepo()
+        self.__filmRepo = FilmRepo()
 
 
     def run_all_tests(self) -> None:
@@ -34,7 +36,7 @@ class Teste:
         assert(film.getDescriere() == descriere)
         assert(film.getGen() == gen)
         self.__ic.updateLastFilmId()
-        self.__repo.adauga_film(film, False)
+        self.__filmRepo.adauga_film(film, False)
 
 
     def test_creaza_client(self, nume, cnp) -> None:
@@ -44,32 +46,32 @@ class Teste:
         assert(client.getName() == nume)
         assert(client.getCnp() == cnp)
         self.__ic.updateLastClientId()
-        self.__repo.adauga_client(client, False)
+        self.__clientRepo.adauga_client(client, False)
 
 
     def test_get_film_by_id(self, id) -> None:
-        film = self.__repo.get_film_by_id(id)
+        film = self.__filmRepo.get_film_by_id(id)
         assert(type(film) == Film)
 
 
     def test_get_film_by_title(self, title) -> None:
-        film = self.__repo.get_film_by_title(title)
+        film = self.__filmRepo.get_film_by_title(title)
         assert(type(film) == Film)
 
     
     def test_get_client_by_id(self, id) -> None:
-        client = self.__repo.get_client_by_id(id)
+        client = self.__clientRepo.get_client_by_id(id)
         assert(type(client) == Client)
 
 
     def test_get_client_by_name(self, name) -> None:
-        client = self.__repo.get_client_by_name(name)
+        client = self.__clientRepo.get_client_by_name(name)
         assert(type(client) == Client)
 
 
     def test_del_client(self, id) -> None:
-        self.__repo.deleteClientFromList(self.__repo.get_client_by_id(id), False)
+        self.__clientRepo.deleteClientFromList(self.__clientRepo.get_client_by_id(id), False)
 
 
     def test_del_film(self, id) -> None:
-        self.__repo.deleteFilmFromList(self.__repo.get_film_by_id(id), False)
+        self.__filmRepo.deleteFilmFromList(self.__filmRepo.get_film_by_id(id), False)

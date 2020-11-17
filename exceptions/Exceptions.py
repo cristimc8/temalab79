@@ -32,3 +32,21 @@ class FilmNotFound(Exception):
     def __init__(self, message = 'Filmul cautat nu exista inca!'):
         self.__message = message
         super().__init__(self.__message)
+
+
+class FilmTitleTooShort(Exception):
+    def __init__(self, message = 'Titlul filmului trebuie sa fie mai lung de atat!'):
+        self.__message = message
+        super().__init__(self.__message)
+
+
+class FilmDescriptionTooShort(Exception):
+    def __init__(self, message = 'Descrierea filmului trebuie sa fie mai lunga de atat!'):
+        self.__message = message
+        super().__init__(self.__message)
+
+
+class FilmGenreTooShort(Exception):
+    def __init__(self, message = 'Genul filmului trebuie sa fie mai lung de atat!'):
+        self.__message = message
+        super().__init__(self.__message)

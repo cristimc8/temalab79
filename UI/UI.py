@@ -77,6 +77,7 @@ class UI:
         print('/' * 30)
 
 
+    @staticmethod
     def display_client_added(client):
         print('/' * 30)
         print('Am adaugat cu succes pe {} in sistemul nostru!\nDetalii:\nId:{}\nNume: {}\nCNP: {}'
@@ -92,7 +93,14 @@ class UI:
 
 
     @staticmethod
-    def FilmAlreadyExists(film, err):
+    def FilmAlreadyExists(err):
         print('*' * 20)
-        print('{}\n{}'.format(str(err), str(film)))
+        print('{}'.format(str(err)))
+        print('*' * 20)
+
+
+    @staticmethod
+    def display_generic_error(err):
+        print('*' * 20)
+        print('{}'.format(str(err)))
         print('*' * 20)

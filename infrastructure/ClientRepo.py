@@ -36,6 +36,16 @@ class ClientRepo:
         return False
 
 
+    def get_client_by_cnp(self, cnp):
+        #Functie care cauta un client dupa CNP
+        #Date de intrare: cnp String
+        #Date de iesire: client Client / False pentru client inexistent
+        for client in self.__listaClienti:
+            if client.getCnp() == cnp:
+                return client
+        return False
+
+
     def deleteClientFromList(self, clientToDelete, ui=True) -> None:
         #Functie care sterge un client din repo
         #Date de intrare: clientToDelete Client

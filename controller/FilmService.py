@@ -16,7 +16,8 @@ class FilmService:
         film = Film(self.__ic.getNewFilmId(), titlu, descriere, gen)
         #Creezi o instanta a obiectului
         #Validezi
-        self.__validare.validare_film(film, self.__repo.get_lista_filme())
+        self.__validare.validare_film(film)
+        self.verifica_dublura_titlu(titlu)
         self.__ic.updateLastFilmId()
         #Actualizam ultimul ID al filmelor
         self.__repo.adauga_film(film)
@@ -29,10 +30,32 @@ class FilmService:
         film = self.__repo.get_film_by_id(id)
         if type(film) != Film:
             raise FilmNotFound
+        #Cream un film nou dupa cerintele filmului actualizat
+        newFilm = Film(titlu, descriere, gen)
+        self.__validare.validare_film(newFilm)
+        self.verifica_dublura_titlu(titlu)
+        #Daca este bun, actualizam filmul original
         film.updateTitlu(titlu)
         film.updateDescriere(descriere)
         film.updateGen(gen)
         self.__repo.updateFilmInList(film)
+
+
+    def verifica_dublura_titlu(self, titlu):
+        #Functie care arunca exceptie de tipul FilmAlreadyExists daca filmul cautat exista deja
+        #Date de intrare: titlu String
+        #Date de iesire: -
+        filmSearch = self.exista_film_titlu(titlu)
+        if filmSearch == True:
+            raise FilmAlreadyExists
+            
+
+
+    def este_de_tip_film(self, film):
+        #Functie care verifica daca un obiect 'film' este de tip Film
+        #Date de intrare: film Obj
+        #Date de iesire: Boolean
+        return type(film) == Film
 
 
     def modificare_client(self, id, nume, cnp):
@@ -45,21 +68,29 @@ class FilmService:
     def cauta_film(self, filmId):
         #Functie care cauta un film din repo
         #Date de intrare: filmId int
-        #Date de iesire: True -> film gasit
+        #Date de iesire: filmGasit Film
         filmGasit = self.__repo.get_film_by_id(filmId)
-        if type(filmGasit) != Film:
-            raise FilmNotFound
-        return True
+        if self.este_de_tip_film(filmGasit):
+            return filmGasit
+        return None
+
+
+    def exista_film_titlu(self, titlu):
+        #Functie care cauta un film din repo
+        #Date de intrare: filmId int
+        #Date de iesire: True -> film gasit
+        filmGasit = self.__repo.get_film_by_title(titlu)
+        return self.este_de_tip_film(filmGasit)
 
 
     def cauta_film_titlu(self, filmName):
         #Functie care cauta un film din repo dupa nume
         #Date de intrare: filmName String
-        #Date de iesire: True -> Film gasit
+        #Date de iesire: filmGasit Film
         filmGasit = self.__repo.get_film_by_title(filmName)
-        if type(filmGasit) != Film:
-            raise FilmNotFound
-        return True
+        if self.este_de_tip_film(filmName):
+            return filmGasit
+        return None
 
 
     def sterge_film(self, id):
@@ -67,7 +98,7 @@ class FilmService:
         #Date de intrare: id Int
         #Date de iesire: -
         film = self.__repo.get_film_by_id(id)
-        if type(film) != Film:
+        if not self.este_de_tip_film(film):
             raise FilmNotFound
         self.__repo.deleteFilmFromList(film)
 

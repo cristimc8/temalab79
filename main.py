@@ -18,7 +18,6 @@ if __name__ == "__main__":
     console = Console(clientService, filmService)
     console.run()
     
-    #Todo chestiile cu try except
     #IN CONSOLE SCHIMBA METODA DE BATCH
     #Sa ma gindesc la ceva cu inchirieri -- relatii antre obiecte
     #Documentatie si scenarii de rulare

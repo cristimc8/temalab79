@@ -47,6 +47,10 @@ class Console:
                     UI.display_missing_film_error(exc)
                 except ClientNotFound as exc:
                     UI.display_missing_client_error(exc)
+                except FilmAlreadyExists as exc:
+                    UI.FilmAlreadyExists(exc)
+                except (FilmTitleTooShort, FilmDescriptionTooShort, FilmGenreTooShort) as exc:
+                    UI.display_generic_error(exc)
             else: print('Comanda inexistenta!')
 
 

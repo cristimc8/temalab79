@@ -1,4 +1,4 @@
-from teste import Teste
+from TestUnit.Teste import Teste
 from UI.Console import Console
 from infrastructure.Repo import Repo
 from validare.Validare import Validare

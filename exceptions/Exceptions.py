@@ -50,3 +50,21 @@ class FilmGenreTooShort(Exception):
     def __init__(self, message = 'Genul filmului trebuie sa fie mai lung de atat!'):
         self.__message = message
         super().__init__(self.__message)
+
+
+class IdIsNotNumber(Exception):
+    def __init__(self, message = 'ID-ul oferit nu este numar!'):
+        self.__message = message
+        super().__init__(self.__message)
+
+    
+class FilmDejaInchiriat(Exception):
+    def __init__(self, message = 'Filmul acesta este deja inchiriat!'):
+        self.__message = message
+        super().__init__(self.__message)
+
+
+class FilmNuEsteInchiriat(Exception):
+    def __init__(self, message = 'Filmul acesta nu este inchiriat de acest client!'):
+        self.__message = message
+        super().__init__(self.__message)

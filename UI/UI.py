@@ -16,6 +16,20 @@ class UI:
 
 
     @staticmethod
+    def empty_input():
+        print("*" * 20)
+        print("Optiunile nu pot fi goale!")
+        print("*" * 20)
+
+
+    @staticmethod
+    def bad_option_selected():
+        print("*" * 20)
+        print("Trebuie sa scrii un numar din lista!")
+        print("*" * 20)
+
+
+    @staticmethod
     def show_all_films(filmList):
         '''
         Metoda primeste ca argument lista de filme [Film]
@@ -78,6 +92,28 @@ class UI:
 
 
     @staticmethod
+    def display_inchiriere():
+        print("/" * 30)
+        print("Filmul a fost inchiriat cu succes!")
+        print("/" * 30)
+
+
+    @staticmethod
+    def display_client(client):
+        print("/" * 30)
+        print("Detalii despre {}:\nId:{}\nCNP:{}".format(client.getName(), client.getId(), client.getCnp()))
+        print("/" * 30)
+
+    
+    @staticmethod
+    def display_client_updated(client):
+        print('/' * 30)
+        print('Am modificat cu succes {} in lista noastra!\nDetalii {}:\nId:{}\nCnp: {}'
+        .format(client.getName(), client.getName(), str(client.getId()), client.getCnp()))
+        print('/' * 30)
+
+
+    @staticmethod
     def display_client_added(client):
         print('/' * 30)
         print('Am adaugat cu succes pe {} in sistemul nostru!\nDetalii:\nId:{}\nNume: {}\nCNP: {}'
@@ -104,3 +140,17 @@ class UI:
         print('*' * 20)
         print('{}'.format(str(err)))
         print('*' * 20)
+
+
+    @staticmethod
+    def display_client_deleted_notification():
+        print("/" * 30)
+        print("Am sters cu succes clientul!")
+        print("/" * 30)
+
+
+    @staticmethod
+    def display_inchiriere(inchiriere):
+        print("/" * 30)
+        print('Inchiriere:\nClient:{}\nFilm:{}'.format(inchiriere.getClient(), inchiriere.getFilm()))
+        print("/" * 30)

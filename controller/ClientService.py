@@ -37,27 +37,65 @@ class ClientService:
         #Functie care cauta un clinet din repo
         #Date de intrare: clientId int
         #Date de iesire: client Client -> client gasit
-        client = self.__repo.get_client_by_id(clientId)
+        try:
+            clientId = int(clientId)
+        except:
+            raise IdIsNotNumber
+        client = self.get_client_by_id(clientId)
         if self.este_de_tip_client(client):
             return client
         return None
+
+
+    def display_all_clients(self):
+        #Functie care arata toti clientii
+        self.__repo.display_all_clients()
+
+        
+    def get_client_by_id(self, id):
+        #Functie care cauta un client dupa ID
+        #Date de intrare: id Int
+        #Date de iesire: client Client / False pentru client inexistent
+        try:
+            id = int(id)
+        except:
+            raise IdIsNotNumber
+        listaClienti = self.__repo.get_lista_clienti()
+        for client in listaClienti:
+            print(client.getId())
+            if client.getId() == id:
+                return client
+        return False
+
+
+    def get_client_by_name(self, name):
+        #Functie care cauta un client dupa nume
+        #Date de intrare: name String
+        #Date de iesire: client Client / False pentru client inexistent
+        listaClienti = self.__repo.get_lista_clienti()
+        for client in listaClienti:
+            if client.getName() == name:
+                return client
+        return False
+
+
+    def get_client_by_cnp(self, cnp):
+        #Functie care cauta un client dupa CNP
+        #Date de intrare: cnp String
+        #Date de iesire: client Client / False pentru client inexistent
+        listaClienti = self.__repo.get_lista_clienti()
+        for client in listaClienti:
+            if client.getCnp() == cnp:
+                return client
+        return False
 
 
     def exista_client_cnp(self, cnp):
         #Functie care cauta un client din repo dupa cnp
         #Date de intrare: cnp String
         #Date de iesire: True -> client gasit
-        client = self.__repo.get_client_by_cnp(cnp)
+        client = self.get_client_by_cnp(cnp)
         return self.este_de_tip_client(client)
-
-    def cauta_client_cnp(self, cnp):
-        #Functie care cauta un client din repo dupa cnp
-        #Date de intrare: cnp String
-        #Date de iesire: client Client -> client gasit
-        client = self.__repo.get_client_by_cnp(cnp)
-        if self.este_de_tip_client(client):
-            return client
-        return None
         
 
     def este_de_tip_client(self, client):
@@ -67,21 +105,28 @@ class ClientService:
         return type(client) == Client
 
 
-    def cauta_client_nume(self, nume):
-        #Functie care cauta un client din repo dupa nume
-        #Date de intrare: nume String
-        #Date de iesire: client Client -> Client gasit
-        client = self.__repo.get_client_by_name(nume)
-        if self.este_de_tip_client(client):
-            return client
-        return None
+    def modificare_client(self, id, nume, cnp):
+        #Functie care modifica un film cu valori noi
+        #Date de intrare: id Int, titlu String, descriere String, gen String
+        #Date de iesire: -
+        client = self.get_client_by_id(id)
+        if type(client) != Client:
+            raise ClientNotFound
+        #Cream un clinet nou dupa cerintele clientului actualizat
+        newClient = Client(id, nume, cnp)
+        self.__validare.validare_client(newClient)
+        self.verifica_dublura_cnp(cnp)
+        #Daca este bun, actualizam clientul original
+        client.updateNume(nume)
+        client.updateCnp(cnp)
+        self.__repo.updateClientInList(client)
 
 
     def sterge_client(self, id):
         #Functie care sterge clientul din repo
         #Date de intrare: id Int
         #Date de iesire: -
-        client = self.__repo.get_client_by_id(id)
+        client = self.get_client_by_id(id)
         if not self.este_de_tip_client(client):
             raise ClientNotFound
         self.__repo.deleteClientFromList(client)

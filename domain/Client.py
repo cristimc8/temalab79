@@ -46,3 +46,17 @@ class Client:
         :out: cnp String
         '''
         return self.__cnp
+
+    
+    def updateNume(self, nume):
+        '''
+        Functie care actualizeaza numele clientului
+        '''
+        self.__name = nume
+
+
+    def updateCnp(self, cnp):
+        '''
+        Functie care actualizeaza cnp-ul clientului
+        '''
+        self.__cnp = cnp

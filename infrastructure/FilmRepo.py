@@ -1,10 +1,8 @@
-from domain.Inchirieri import Inchirieri
 from UI.UI import UI
 
 class FilmRepo:
     def __init__(self):
         self.__listaFilme = []
-        self.__inchirieri = Inchirieri()
 
     
     def adauga_film(self, film, ui=True):
@@ -21,26 +19,6 @@ class FilmRepo:
         #Date de iesire: -
         for film in self.get_lista_filme():
             UI.display_film(film)
-
-    
-    def get_film_by_id(self, id):
-        #Functie care cauta un film dupa ID
-        #Date de intrare: id Int
-        #Date de iesire: film Film / False pentru film inexistent
-        for film in self.__listaFilme:
-            if film.getId() == id:
-                return film
-        return False
-
-    
-    def get_film_by_title(self, title):
-        #Functie care cauta un film dupa titlu
-        #Date de intrare: title String
-        #Date de iesire: film Film / False pentru film inexistent
-        for film in self.__listaFilme:
-            if film.getTitlu() == title:
-                return film
-        return False
 
 
     def updateFilmInList(self, newFilm, ui=True):
@@ -70,4 +48,4 @@ class FilmRepo:
         #Functie care returneaza lista de filme din repo
         #Date de intrare: -
         #Date de iesire: -
-        return self.__listaFilme
+        return list(self.__listaFilme)

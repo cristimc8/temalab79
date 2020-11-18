@@ -1,3 +1,6 @@
+from os import stat
+
+
 class UI:
     def __init__(self):
         pass
@@ -36,9 +39,17 @@ class UI:
         '''
         print('/' * 30)
         for film in filmList:
-            print('Titlu: {}\nDescriere: {}\nGen: {}\n'
-            .format(film.getTitle(), film.getDescription(), film.getGenre()))
+            print('Detalii despre film:\nTitlu: {}\nDescriere: {}\nGen: {}\n'
+            .format(film.getTitlu(), film.getDescriere(), film.getGen()))
         print('/' * 30)
+
+    
+    @staticmethod
+    def display_all_clients(clientList):
+        print("/" * 30)
+        for client in clientList:
+            print("Detalii despre {}:\nId:{}\nCNP:{}".format(client.getName(), client.getId(), client.getCnp()))
+        print("/" * 30)
 
 
     @staticmethod
@@ -152,5 +163,12 @@ class UI:
     @staticmethod
     def display_inchiriere(inchiriere):
         print("/" * 30)
-        print('Inchiriere:\nClient:{}\nFilm:{}'.format(inchiriere.getClient(), inchiriere.getFilm()))
+        print('Inchiriere:\nClient:{}\nFilm:{}\nInchiriat:{}'.format(inchiriere.getClient(), inchiriere.getFilm(), str(inchiriere.isReturnat())))
+        print("/" * 30)
+
+
+    @staticmethod
+    def inchiriere_returnata():
+        print("/" * 30)
+        print("Inchirierea a fost returnata cu succes!")
         print("/" * 30)

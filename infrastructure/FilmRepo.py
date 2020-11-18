@@ -1,5 +1,3 @@
-from UI.UI import UI
-
 class FilmRepo:
     def __init__(self):
         self.__listaFilme = []
@@ -10,15 +8,7 @@ class FilmRepo:
         #Date de intrare: film Film
         #Date de iesire: -
         self.__listaFilme.append(film)
-        if ui: UI.display_film_added(film)
-
-
-    def display_all_films(self):
-        #Functie care display-uieste toate filmele din repo
-        #Date de intrare: -
-        #Date de iesire: -
-        for film in self.get_lista_filme():
-            UI.display_film(film)
+        #if ui: UI.display_film_added(film)
 
 
     def updateFilmInList(self, newFilm, ui=True):
@@ -28,7 +18,7 @@ class FilmRepo:
         for index, film in enumerate(self.__listaFilme):
             if film.getId() == newFilm.getId():
                 self.__listaFilme[index] = newFilm
-        if ui: UI.display_film_updated(newFilm)
+        #if ui: UI.display_film_updated(newFilm)
 
 
     def deleteFilmFromList(self, filmToDelete, ui=True) -> None:
@@ -41,7 +31,7 @@ class FilmRepo:
                 idx = index
                 break
         del(self.__listaFilme[idx])
-        if ui: UI.display_film_deleted_notification()
+        #if ui: UI.display_film_deleted_notification()
 
 
     def get_lista_filme(self):

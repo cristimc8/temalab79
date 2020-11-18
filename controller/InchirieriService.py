@@ -23,18 +23,25 @@ class InchirieriService:
         return inchiriere
 
     
-    def returneaza_inchiriere(self, client, film):
-        inchiriere = Inchirieri(client, film)
-        if inchiriere in self.get_inchirieri_nereturnate():
-            inchiriere.returneaza()
-        else:
-            raise FilmNuEsteInchiriat
+    def returneaza_inchiriere(self, idC, idF):
+        client = self.__clientService.get_client_by_id(idC)
+        if type(client) == bool:
+            raise ClientNotFound
+        film = self.__filmService.get_film_by_id(idF)
+        if type(film) == bool:
+            raise FilmNotFound
+
+        for inchiriere in self.get_inchirieri_nereturnate():
+            if inchiriere.getFilm() == film:
+                inchiriere.returneaza()
+                return True
+        raise FilmNuEsteInchiriat
 
 
     def este_inchiriat(self, film):
-        listaInchirieri = self.__repo.get_lista_inchirieri()
+        listaInchirieri = self.get_inchirieri_nereturnate()
         for inchiriere in listaInchirieri:
-            if inchiriere.getFilm() == film and not inchiriere.isReturnat():
+            if inchiriere.getFilm() == film:
                 return True
         return False
 
@@ -46,6 +53,15 @@ class InchirieriService:
             if inchiriere.getClient() == client:
                 listaInchirieriClient.append(inchiriere)
         return listaInchirieriClient
+
+
+    def get_inchirieri_film(self, film):
+        listaCarti = []
+        listaInchirieri = self.__repo.get_lista_inchirieri()
+        for inchiriere in listaInchirieri:
+            if inchiriere.getFilm() == film:
+                listaCarti.append(inchiriere)
+        return listaCarti
 
 
     def get_inchirieri_nereturnate(self):

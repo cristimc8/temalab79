@@ -22,6 +22,7 @@ class ClientService:
         self.__ic.updateLastClientId()
         #Adaugi la lista
         self.__repo.adauga_client(client)
+        return client
 
 
     def verifica_dublura_cnp(self, cnp):
@@ -49,7 +50,8 @@ class ClientService:
 
     def display_all_clients(self):
         #Functie care arata toti clientii
-        self.__repo.display_all_clients()
+        #self.__repo.display_all_clients()
+        return self.__repo.get_lista_clienti()
 
         
     def get_client_by_id(self, id):
@@ -120,6 +122,7 @@ class ClientService:
         client.updateNume(nume)
         client.updateCnp(cnp)
         self.__repo.updateClientInList(client)
+        return client
 
 
     def sterge_client(self, id):

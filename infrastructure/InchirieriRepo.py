@@ -11,7 +11,7 @@ class InchirieriRepo:
         in -> client Client, film Film
         '''
         self.__listaInchirieri.append(inchiriere)
-        if ui: UI.display_inchiriere(inchiriere)
+        #if ui: UI.display_inchiriere(inchiriere)
 
 
     def sterge_inchiriere(self, inchiriere):

@@ -47,10 +47,11 @@ class Teste:
     
     def run_teste_inchirieri(self) -> None:
         self.test_inchiriaza_film(1, 1)
+        self.test_returnare_inchiriere(1, 1)
 
 
     def test_inchiriaza_film(self, idC, idF):
-        self.__inchirieriSrv.adaugare_inchiriere(idC, idF, False)
+        self.__inchirieriSrv.adaugare_inchiriere(idC, idF)
 
 
     def test_creaza_film(self, titlu, descriere, gen) -> None:
@@ -77,6 +78,7 @@ class Teste:
     def test_get_film_by_id(self, id) -> None:
         film = self.__filmSrv.get_film_by_id(id)
         assert(type(film) == Film)
+        assert(film.getId() == 1)
 
 
     def test_get_film_by_title(self, title) -> None:
@@ -115,3 +117,10 @@ class Teste:
         self.__clientSrv.modificare_client(id, nume, cnp)
         assert(self.__clientSrv.get_client_by_id(id).getName() == nume)
         assert(self.__clientSrv.get_client_by_id(id).getCnp() == cnp)
+
+
+    def test_returnare_inchiriere(self, idC, idF):
+        film = self.__filmSrv.get_film_by_id(idF)
+        assert(self.__inchirieriSrv.este_inchiriat(film) == True)
+        self.__inchirieriSrv.returneaza_inchiriere(idC, idF)
+        assert(self.__inchirieriSrv.este_inchiriat(film) == False)

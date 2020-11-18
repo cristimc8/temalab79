@@ -43,7 +43,7 @@ class Console:
         try:
             option = int(option)
         except: return False
-        return option >= 1 and option <= 10
+        return option >= 1 and option <= 11
 
 
     def not_empty(self, input):
@@ -78,11 +78,11 @@ class Console:
             elif input == 2: self.meniu_sterge_client()
             elif input == 3: self.meniu_adauga_film()
             elif input == 4: self.meniu_modifica_film()
-            elif input == 5: self.__dict_list[self.__user_input]()
+            elif input == 5: UI.show_all_films(self.__dict_list[self.__user_input]())
             elif input == 6: self.meniu_sterge_film()
             elif input == 7: self.meniu_inchiriaza_film()
             elif input == 8: self.meniu_modifica_client()
-            elif input == 9: self.__dict_list[self.__user_input]()
+            elif input == 9: UI.display_all_clients(self.__dict_list[self.__user_input]())
             elif input == 10: self.__dict_list[self.__user_input]()
             elif input == 11: self.meniu_returneaza_inchiriere()
         except (CnpNotValid, CnpNotNumber, CnpAlreadyExists) as exc:
@@ -107,24 +107,28 @@ class Console:
         idC = input("ID-ul clientului care vrea sa returneze: ")
         idF = input("ID-ul filmului pe care vrea clientul sa-l returneze: ")
         self.__dict_list[self.__user_input](idC, idF)
+        UI.inchiriere_returnata()
 
 
     def meniu_inchiriaza_film(self):
         idC = input("ID-ul clientului care vrea sa inchirieze: ")
         idF = input("ID-ul filmului pe care vrea clientul sa il inchirieze: ")
-        self.__dict_list[self.__user_input](idC, idF)
+        inchiriere = self.__dict_list[self.__user_input](idC, idF)
+        UI.display_inchiriere(inchiriere)
 
 
     def meniu_modifica_client(self):
         id = input("ID-ul clientului pe care vrei sa il modifici: ")
         nume = input("Nume nou la client: ")
         cnp = input("CNP nou la client: ")
-        self.__dict_list[self.__user_input](id, nume, cnp)
+        client = self.__dict_list[self.__user_input](id, nume, cnp)
+        UI.display_client_updated(client)
 
 
     def meniu_sterge_film(self):
         id = input("ID-ul filmului pe care vrei sa il stergi: ")
         self.__dict_list[self.__user_input](id)
+        UI.display_film_deleted_notification()
 
 
     def meniu_modifica_film(self):
@@ -132,25 +136,29 @@ class Console:
         titlu = input("Titlu nou: ")
         descriere = input("Descriere noua: ")
         gen = input("Gen nou: ")
-        self.__dict_list[self.__user_input](id, titlu, descriere, gen)
+        film = self.__dict_list[self.__user_input](id, titlu, descriere, gen)
+        UI.display_film_updated(film)
 
 
     def meniu_adauga_film(self):
         titlu = input("Titlul filmului: ")
         descriere = input("Descrierea filmului: ")
         gen = input("Genul filmului: ")
-        self.__dict_list[self.__user_input](titlu, descriere, gen)
+        film = self.__dict_list[self.__user_input](titlu, descriere, gen)
+        UI.display_film_added(film)
 
     
     def meniu_adauga_client(self):
         nume_client = input("Nume client: ")
         cnp = input("CNP client(13 cifre): ")
-        self.__dict_list[self.__user_input](nume_client, cnp)
+        client = self.__dict_list[self.__user_input](nume_client, cnp)
+        UI.display_client_added(client)
 
 
     def meniu_sterge_client(self):
         id_client = input("ID-ul clientului pe care vrei sa-l stergi: ")
         self.__dict_list[self.__user_input](id_client)
+        UI.display_client_deleted_notification()
         
 
     def run(self):

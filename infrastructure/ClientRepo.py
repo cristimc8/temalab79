@@ -1,5 +1,3 @@
-from UI.UI import UI
-
 class ClientRepo:
     def __init__(self):
         self.__listaClienti = []
@@ -10,7 +8,7 @@ class ClientRepo:
         #Date de intrare: client Client
         #Date de iesire: -
         self.__listaClienti.append(client)
-        if ui: UI.display_client_added(client)
+        #if ui: UI.display_client_added(client)
 
 
     def deleteClientFromList(self, clientToDelete, ui=True) -> None:
@@ -23,7 +21,7 @@ class ClientRepo:
                 idx = index
                 break
         del(self.__listaClienti[idx])
-        if ui: UI.display_client_deleted_notification()
+        #if ui: UI.display_client_deleted_notification()
 
 
     def get_lista_clienti(self):
@@ -31,14 +29,6 @@ class ClientRepo:
         #Date intrare: -
         #Date de iesire: -
         return list(self.__listaClienti)
-
-
-    def display_all_clients(self):
-        #Functie care display-uieste toate filmele din repo
-        #Date de intrare: -
-        #Date de iesire: -
-        for client in self.get_lista_clienti():
-            UI.display_client(client)
 
     
     def updateClientInList(self, newClient, ui=True):
@@ -48,4 +38,4 @@ class ClientRepo:
         for index, client in enumerate(self.__listaClienti):
             if client.getId() == newClient.getId():
                 self.__listaClienti[index] = newClient
-        if ui: UI.display_client_updated(newClient)
+        #if ui: UI.display_client_updated(newClient)

@@ -21,6 +21,7 @@ class FilmService:
         self.__ic.updateLastFilmId()
         #Actualizam ultimul ID al filmelor
         self.__repo.adauga_film(film)
+        return film
 
 
     def modificare_film(self, id, titlu, descriere, gen):
@@ -31,7 +32,7 @@ class FilmService:
         if type(film) != Film:
             raise FilmNotFound
         #Cream un film nou dupa cerintele filmului actualizat
-        newFilm = Film(titlu, descriere, gen)
+        newFilm = Film(id, titlu, descriere, gen)
         self.__validare.validare_film(newFilm)
         self.verifica_dublura_titlu(titlu)
         #Daca este bun, actualizam filmul original
@@ -39,6 +40,7 @@ class FilmService:
         film.updateDescriere(descriere)
         film.updateGen(gen)
         self.__repo.updateFilmInList(film)
+        return film
 
 
     def verifica_dublura_titlu(self, titlu):
@@ -106,7 +108,7 @@ class FilmService:
         #Functie care arata toate filmele din repo
         #Date de intrare: -
         #Date de iesire: -
-        self.__repo.display_all_films()
+        return self.__repo.get_lista_filme()
 
 
     def inchiriaza_film(self, clientName, filmTitle):

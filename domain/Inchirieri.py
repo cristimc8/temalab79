@@ -48,3 +48,8 @@ class Inchirieri:
             toReturn += " i inchiriat "
         toReturn += str(self.__film)
         return toReturn
+
+
+    def __eq__(self, o: object) -> bool:
+        if self.getClient() == o.getClient() and self.getFilm() == o.getFilm(): return True
+        return False

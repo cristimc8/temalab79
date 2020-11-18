@@ -22,4 +22,8 @@ if __name__ == "__main__":
     console = Console(clientService, filmService, inchirieriService)
     console.run()
 
+#sa adaugam in meniu o optone prin care sa genream aleator entitati
+#film si client
+#sa folism un modul random
+
     

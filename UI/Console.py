@@ -1,13 +1,13 @@
-from os import initgroups
 from UI.UI import UI
 from exceptions.Exceptions import *
 class Console:
     def __init__(self, clientService, filmService, inchiriereService):
         self.__user_input = ''
-        self.__dict_batch = {'adauga_client': clientService.adaugare_client, 'adauga_film': filmService.adaugare_film,
+        '''self.__dict_batch = {'adauga_client': clientService.adaugare_client, 'adauga_film': filmService.adaugare_film,
         'modifica_film': filmService.modificare_film, 'arata_filme': filmService.display_all_films,
         'sterge_film': filmService.sterge_film, 'inchiriaza_film': filmService.inchiriaza_film, 'inchirieri': filmService.afiseaza_inchirieri,
-        'out': exit}
+        'out': exit}'''
+
 
         self.__dict_list = {
             '1': clientService.adaugare_client,
@@ -21,6 +21,10 @@ class Console:
             '9': clientService.display_all_clients,
             '10': inchiriereService.arata_inchirieri,
             '11': inchiriereService.returneaza_inchiriere,
+            '12': filmService.cautare_dupa_id,
+            '13': clientService.cauta_client,
+            '14': clientService.adauga_random,
+            '15': filmService.adauga_random,
             'out': exit
         }
 
@@ -43,7 +47,7 @@ class Console:
         try:
             option = int(option)
         except: return False
-        return option >= 1 and option <= 11
+        return option >= 1 and option <= 15
 
 
     def not_empty(self, input):
@@ -68,6 +72,10 @@ class Console:
         print("9 -> Arata toti clientii")
         print("10 -> Arata toate inchirieriile")
         print("11 -> Returneaza un film inchiriat")
+        print("12 -> Cauta film dupa id")
+        print("13 -> Cauta client dupa id")
+        print("14 -> Genereaza n Clienti random")
+        print("15 -> Genereaza n Filme random")
         print("out -> iesi? :(")
 
 
@@ -83,8 +91,12 @@ class Console:
             elif input == 7: self.meniu_inchiriaza_film()
             elif input == 8: self.meniu_modifica_client()
             elif input == 9: UI.display_all_clients(self.__dict_list[self.__user_input]())
-            elif input == 10: self.__dict_list[self.__user_input]()
+            elif input == 10: UI.display_all_inchirieri(self.__dict_list[self.__user_input]())
             elif input == 11: self.meniu_returneaza_inchiriere()
+            elif input == 12: self.meniu_cauta_film()
+            elif input == 13: self.meniu_cauta_client()
+            elif input == 14: self.meniu_genereaza_clienti()
+            elif input == 15: self.meniu_genereaza_filme()
         except (CnpNotValid, CnpNotNumber, CnpAlreadyExists) as exc:
             UI.CnpNotValid(exc)
         except FilmNotFound as exc:
@@ -101,6 +113,28 @@ class Console:
             UI.display_generic_error(exc)
         except FilmNuEsteInchiriat as exc:
             UI.display_generic_error(exc)
+
+    
+    def meniu_genereaza_clienti(self):
+        n = int(input("Cati clienti vrei sa generezi: "))
+        self.__dict_list[self.__user_input](n)
+
+
+    def meniu_genereaza_filme(self):
+        n = int(input("Cate filme vrei sa generezi: "))
+        self.__dict_list[self.__user_input](n)
+
+
+    def meniu_cauta_client(self):
+        idC = input("ID-ul clientului pe care vrei sa-l cauti: ")
+        client = self.__dict_list[self.__user_input](idC)
+        UI.display_client(client)
+
+
+    def meniu_cauta_film(self):
+        idF = input("Id-ul filmului pe care sa-l cauti: ")
+        film = self.__dict_list[self.__user_input](idF)
+        UI.display_film(film)
 
 
     def meniu_returneaza_inchiriere(self):

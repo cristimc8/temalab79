@@ -30,6 +30,7 @@ class Teste:
     def run_teste_film(self) -> None:
         self.test_creaza_film("Titanic", "super tare", "Actiune")
         self.test_get_film_by_id(1)
+        self.test_cauta_film_dupa_id(1)
         self.test_get_film_by_title("Titanic")
         self.test_creaza_film("Gigantic", "super tare", "Comedie")
         self.test_modifica_film(2, "Mega", "Descriere", "gen")
@@ -39,6 +40,7 @@ class Teste:
     def run_teste_client(self) -> None:
         self.test_creaza_client("Vasalie", "1234567891234")
         self.test_get_client_by_id(1)
+        self.test_cauta_client_dupa_id(1)
         self.test_get_client_by_name("Vasalie")
         self.test_creaza_client("Geon", "1234567851234")
         self.test_modifica_client(2, "Gion", "1236567851234")
@@ -47,6 +49,8 @@ class Teste:
     
     def run_teste_inchirieri(self) -> None:
         self.test_inchiriaza_film(1, 1)
+        self.test_get_inchirieri_nereturnate()
+        self.test_get_inchirireri_client(1)
         self.test_returnare_inchiriere(1, 1)
 
 
@@ -124,3 +128,26 @@ class Teste:
         assert(self.__inchirieriSrv.este_inchiriat(film) == True)
         self.__inchirieriSrv.returneaza_inchiriere(idC, idF)
         assert(self.__inchirieriSrv.este_inchiriat(film) == False)
+
+
+    def test_get_inchirieri_nereturnate(self):
+        inchirieri = self.__inchirieriSrv.get_inchirieri_nereturnate()
+        for inchiriere in inchirieri:
+            assert(inchiriere.isReturnat() == False)
+
+
+    def test_get_inchirireri_client(self, idC):
+        client = self.__clientSrv.get_client_by_id(idC)
+        inchirieri = self.__inchirieriSrv.get_inchirieri_client(client)
+        for inchiriere in inchirieri:
+            assert(inchiriere.getClient() == client)
+
+
+    def test_cauta_film_dupa_id(self, id):
+        film = self.__filmSrv.cautare_dupa_id(id)
+        assert(type(film) == Film)
+
+    
+    def test_cauta_client_dupa_id(self, id):
+        client = self.__clientSrv.cauta_client(id)
+        assert(type(client) == Client)

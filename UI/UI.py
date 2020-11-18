@@ -46,10 +46,10 @@ class UI:
     
     @staticmethod
     def display_all_clients(clientList):
-        print("/" * 30)
         for client in clientList:
+            print("/" * 30)
             print("Detalii despre {}:\nId:{}\nCNP:{}".format(client.getName(), client.getId(), client.getCnp()))
-        print("/" * 30)
+            print("/" * 30)
 
 
     @staticmethod
@@ -163,7 +163,7 @@ class UI:
     @staticmethod
     def display_inchiriere(inchiriere):
         print("/" * 30)
-        print('Inchiriere:\nClient:{}\nFilm:{}\nInchiriat:{}'.format(inchiriere.getClient(), inchiriere.getFilm(), str(inchiriere.isReturnat())))
+        print('Inchiriere:\nClient:{}\nFilm:{}\nReturnat:{}'.format(inchiriere.getClient(), inchiriere.getFilm(), str(inchiriere.isReturnat())))
         print("/" * 30)
 
 
@@ -172,3 +172,11 @@ class UI:
         print("/" * 30)
         print("Inchirierea a fost returnata cu succes!")
         print("/" * 30)
+
+
+    @staticmethod
+    def display_all_inchirieri(listaInchirieri):
+        for inchiriere in listaInchirieri:
+            print("/" * 30)
+            print('Inchiriere:\nClient:{}\nFilm:{}\nReturnat:{}'.format(inchiriere.getClient(), inchiriere.getFilm(), str(inchiriere.isReturnat())))
+            print("/" * 30)

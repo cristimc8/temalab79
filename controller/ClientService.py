@@ -1,12 +1,20 @@
 from domain.Client import Client
 from domain.InstanceCounter import InstanceCounter
 from exceptions.Exceptions import *
+from random_generator.RandomFill import RandomFill
 
 class ClientService:
     def __init__(self, repo, validare) -> None:
         self.__validare = validare
         self.__repo = repo
         self.__ic = InstanceCounter()
+        self.__rand = RandomFill()
+
+
+    def adauga_random(self, n):
+        self.__rand.get_random_clients(n)
+        for index, el in enumerate(self.__rand.cnps):
+            self.adaugare_client(self.__rand.names[index], self.__rand.cnps[index])
 
 
     def adaugare_client(self, nume, cnp):
@@ -45,7 +53,7 @@ class ClientService:
         client = self.get_client_by_id(clientId)
         if self.este_de_tip_client(client):
             return client
-        return None
+        raise ClientNotFound
 
 
     def display_all_clients(self):
@@ -64,7 +72,6 @@ class ClientService:
             raise IdIsNotNumber
         listaClienti = self.__repo.get_lista_clienti()
         for client in listaClienti:
-            print(client.getId())
             if client.getId() == id:
                 return client
         return False

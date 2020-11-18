@@ -1,12 +1,20 @@
 from domain.Film import Film
 from domain.InstanceCounter import InstanceCounter
 from exceptions.Exceptions import *
+from random_generator.RandomFill import RandomFill
 
 class FilmService:
     def __init__(self, repo, valid) -> None:
         self.__validare = valid
         self.__repo = repo
         self.__ic = InstanceCounter()
+        self.__rand = RandomFill()
+
+
+    def adauga_random(self, n):
+        self.__rand.get_random_films(n)
+        for index, el in enumerate(self.__rand.filmTitles):
+            self.adaugare_film(self.__rand.filmTitles[index], self.__rand.filmDescriptions[index], self.__rand.filmGenres[index])
 
 
     def adaugare_film(self, titlu, descriere, gen):
@@ -50,6 +58,20 @@ class FilmService:
         filmSearch = self.exista_film_titlu(titlu)
         if filmSearch == True:
             raise FilmAlreadyExists
+
+
+    def cautare_dupa_id(self, id):
+        #Functia care returneaza un obiect de tip Film dupa un id
+        #Date de intare: id Int
+        #Date de iesire: film Film
+        try:
+            id = int(id)
+        except:
+            raise IdIsNotNumber
+        film = self.get_film_by_id(id)
+        if type(film) != Film:
+            raise FilmNotFound
+        return film
             
 
 
@@ -109,20 +131,3 @@ class FilmService:
         #Date de intrare: -
         #Date de iesire: -
         return self.__repo.get_lista_filme()
-
-
-    def inchiriaza_film(self, clientName, filmTitle):
-        if self.cauta_client_nume(clientName) == True and self.cauta_film_titlu(filmTitle) == True:
-            client = self.__repo.get_client_by_name(clientName)
-            film = self.__repo.get_film_by_title(filmTitle)
-            self.__repo.adauga_inchiriere(client, film)
-
-
-    def afiseaza_inchirieri(self, client):
-        clientT = self.__repo.get_client_by_name(client)
-        filmInchiriat = self.__repo.get_inchirieri(clientT)
-        listaFilme = []
-        for film in filmInchiriat:
-            listaFilme.append(film.getTitlu())
-        #UI.afiseaza_inchirieri(listaFilme)
-        #De sters de aici

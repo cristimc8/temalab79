@@ -154,6 +154,27 @@ class UI:
 
 
     @staticmethod
+    def display_occurence_film(title, occurence):
+        print("/" * 30)
+        print('Filmul {} a fost deja inchiriat de {} ori!'.format(title, str(occurence)))
+        print("/" * 30)
+
+    
+    @staticmethod
+    def display_occurence_client(name, occurence):
+        print("/" * 30)
+        print('Clientul {} a inchiriat deja {} filme!'.format(name, str(occurence)))
+        print("/" * 30)
+
+    
+    @staticmethod
+    def display_occurence_genre(gen, occurence):
+        print("/" * 30)
+        print('Genul {} a fost deja inchiriat de {} ori!'.format(gen, str(occurence)))
+        print("/" * 30)
+
+
+    @staticmethod
     def display_client_deleted_notification():
         print("/" * 30)
         print("Am sters cu succes clientul!")

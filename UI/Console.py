@@ -25,6 +25,11 @@ class Console:
             '13': clientService.cauta_client,
             '14': clientService.adauga_random,
             '15': filmService.adauga_random,
+            '16': inchiriereService.get_clients_ordered_by_name,
+            '17': inchiriereService.get_cele_mai_inchiriate,
+            '18': inchiriereService.get_clienti_ordonat_dupa_filme_inchiriate,
+            '19': inchiriereService.get_primii_30perc_clienti,
+            '20': inchiriereService.get_clienti_intre_medii,
             'out': exit
         }
 
@@ -47,7 +52,7 @@ class Console:
         try:
             option = int(option)
         except: return False
-        return option >= 1 and option <= 15
+        return option >= 1 and option <= 20
 
 
     def not_empty(self, input):
@@ -76,6 +81,11 @@ class Console:
         print("13 -> Cauta client dupa id")
         print("14 -> Genereaza n Clienti random")
         print("15 -> Genereaza n Filme random")
+        print("16 -> Arata clientii cu filme inchiriate ordonat dupa nume")
+        print("17 -> Arata cele mai inchiriate filme")
+        print("18 -> Arata clientii cu filme inchiriate sortate dupa nr de filme")
+        print("19 -> Arata primii 30 la suta clienti in functie de filmele inchiriate")
+        print("20 -> Arata Clientii care au inchirieri intre min si max")
         print("out -> iesi? :(")
 
 
@@ -97,6 +107,11 @@ class Console:
             elif input == 13: self.meniu_cauta_client()
             elif input == 14: self.meniu_genereaza_clienti()
             elif input == 15: self.meniu_genereaza_filme()
+            elif input == 16: self.meniu_inchirieri_ordonate_dupa_nume()
+            elif input == 17: self.meniu_cele_mai_inchiriate_filme()
+            elif input == 18: self.meniu_clienti_cele_mai_inchiriate()
+            elif input == 19: self.meniu_get_primii_30perc_clienti()
+            elif input == 20: self.meniu_clienti_intre_medii()
         except (CnpNotValid, CnpNotNumber, CnpAlreadyExists) as exc:
             UI.CnpNotValid(exc)
         except FilmNotFound as exc:
@@ -113,6 +128,40 @@ class Console:
             UI.display_generic_error(exc)
         except FilmNuEsteInchiriat as exc:
             UI.display_generic_error(exc)
+        except ValueError as exc:
+            UI.display_generic_error("Numarul trebuie sa fie antreg")
+
+
+    def meniu_clienti_intre_medii(self):
+        min = int(input("Numarul minim de imprumuturi: "))
+        max = int(input("Numarul maxim de imprumuturi: "))
+        listaClienti = self.__dict_list[self.__user_input](min, max)
+        for title in listaClienti.keys():
+            UI.display_occurence_client(title, listaClienti[title])
+
+
+    def meniu_get_primii_30perc_clienti(self):
+        listaClienti = self.__dict_list[self.__user_input]()
+        for title in listaClienti.keys():
+            UI.display_occurence_client(title, listaClienti[title])
+
+
+    def meniu_clienti_cele_mai_inchiriate(self):
+        listaClienti = self.__dict_list[self.__user_input]()
+        for title in listaClienti.keys():
+            UI.display_occurence_client(title, listaClienti[title])
+
+
+    def meniu_cele_mai_inchiriate_filme(self):
+        listaFilme = self.__dict_list[self.__user_input]()
+        for title in listaFilme.keys():
+            UI.display_occurence_film(title, listaFilme[title])
+
+
+    def meniu_inchirieri_ordonate_dupa_nume(self):
+        listaOdonata = self.__dict_list[self.__user_input]()
+        for inchiriere in listaOdonata:
+            UI.display_inchiriere(inchiriere)
 
     
     def meniu_genereaza_clienti(self):

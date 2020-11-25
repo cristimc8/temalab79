@@ -52,6 +52,31 @@ class Teste:
         self.test_get_inchirieri_nereturnate()
         self.test_get_inchirireri_client(1)
         self.test_returnare_inchiriere(1, 1)
+        self.test_returneaza_clienti_ordonat_inchirieri()
+        self.test_returneaza_cele_mai_inchiriate_filme()
+        self.test_get_clienti_ordonat_dupa_filme_inchiriate()
+        self.test_primii_30perc_clienti()
+
+
+    def test_primii_30perc_clienti(self):
+        listaOrdonata = self.__inchirieriSrv.get_primii_30perc_clienti()
+        assert(listaOrdonata['Vasalie'] == 1)
+
+
+    def test_returneaza_cele_mai_inchiriate_filme(self):
+        listaFilmeOrdonate = self.__inchirieriSrv.get_cele_mai_inchiriate()
+        for film in listaFilmeOrdonate.keys():
+            assert(listaFilmeOrdonate[film] == 1)
+
+
+    def test_get_clienti_ordonat_dupa_filme_inchiriate(self):
+        listaOrdonata = self.__inchirieriSrv.get_clienti_ordonat_dupa_filme_inchiriate()
+        assert (listaOrdonata['Vasalie'] == 1)
+
+
+    def test_returneaza_clienti_ordonat_inchirieri(self):
+        listaOrdonata = self.__inchirieriSrv.get_clients_ordered_by_name()
+        assert(listaOrdonata[0].getClient().getName() == 'Vasalie')
 
 
     def test_inchiriaza_film(self, idC, idF):

@@ -204,6 +204,15 @@ class InchirieriService:
         #[titanic, geon, titanic]
 
 
+        
+    def sterge_inchiriere(self, idC):
+        listaInchirieri = self.__repo.get_lista_inchirieri()
+        for inchiriere in listaInchirieri:
+            if inchiriere.getClient().getId() == idC:
+                self.__repo.sterge_inchiriere(inchiriere)
+        
+
+
 
     def arata_inchirieri(self):
         #Functia care returneaza toate inchirierile

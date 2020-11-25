@@ -10,12 +10,12 @@ class Repo:
         self.__inchirieri = Inchirieri()
 
 
-    def adauga_film(self, film):
+    def adauga_film(self, film, ui=True):
         #Functie care adauga un film nou in repo
         #Date de intrare: film Film
         #Date de iesire: -
         self.__listaFilme.append(film)
-        UI.display_film_added(film)
+        if ui: UI.display_film_added(film)
 
 
     def display_all_films(self):
@@ -26,12 +26,12 @@ class Repo:
             UI.display_film(film)
 
 
-    def adauga_client(self, client):
+    def adauga_client(self, client, ui=True):
         #Functie care adauga un client nou in repo
         #Date de intrare: client Client
         #Date de iesire: -
         self.__listaClienti.append(client)
-        UI.display_client_added(client)
+        if ui: UI.display_client_added(client)
 
 
     def get_film_by_id(self, id):
@@ -74,17 +74,17 @@ class Repo:
         return False
 
 
-    def updateFilmInList(self, newFilm):
+    def updateFilmInList(self, newFilm, ui=True):
         #Functie care actualizeaza un film din repo cu date noi
         #Date de intrare: newFilm Film
         #Date de iesire: -
         for index, film in enumerate(self.__listaFilme):
             if film.getId() == newFilm.getId():
                 self.__listaFilme[index] = newFilm
-        UI.display_film_updated(newFilm)
+        if ui: UI.display_film_updated(newFilm)
 
 
-    def deleteFilmFromList(self, filmToDelete):
+    def deleteFilmFromList(self, filmToDelete, ui=True) -> None:
         #Functie care sterge un film din repo
         #Date de intrare: filmToDelete Film
         #Date de iesire: -
@@ -94,7 +94,20 @@ class Repo:
                 idx = index
                 break
         del(self.__listaFilme[idx])
-        UI.display_film_deleted_notification()
+        if ui: UI.display_film_deleted_notification()
+
+
+    def deleteClientFromList(self, clientToDelete, ui=True) -> None:
+        #Functie care sterge un client din repo
+        #Date de intrare: clientToDelete Client
+        #Date de iesire: -
+        idx = 0
+        for index, client in enumerate(self.__listaClienti):
+            if client.getId() == clientToDelete.getId():
+                idx = index
+                break
+        del(self.__listaClienti[idx])
+        if ui: UI.display_client_deleted_notification()
 
 
     def get_lista_filme(self):

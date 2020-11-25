@@ -1,3 +1,6 @@
+from os import stat
+
+
 class UI:
     def __init__(self):
         pass
@@ -16,15 +19,37 @@ class UI:
 
 
     @staticmethod
+    def empty_input():
+        print("*" * 20)
+        print("Optiunile nu pot fi goale!")
+        print("*" * 20)
+
+
+    @staticmethod
+    def bad_option_selected():
+        print("*" * 20)
+        print("Trebuie sa scrii un numar din lista!")
+        print("*" * 20)
+
+
+    @staticmethod
     def show_all_films(filmList):
         '''
         Metoda primeste ca argument lista de filme [Film]
         '''
         print('/' * 30)
         for film in filmList:
-            print('Titlu: {}\nDescriere: {}\nGen: {}\n'
-            .format(film.getTitle(), film.getDescription(), film.getGenre()))
+            print('Detalii despre film:\nTitlu: {}\nDescriere: {}\nGen: {}\n'
+            .format(film.getTitlu(), film.getDescriere(), film.getGen()))
         print('/' * 30)
+
+    
+    @staticmethod
+    def display_all_clients(clientList):
+        for client in clientList:
+            print("/" * 30)
+            print("Detalii despre {}:\nId:{}\nCNP:{}".format(client.getName(), client.getId(), client.getCnp()))
+            print("/" * 30)
 
 
     @staticmethod
@@ -77,6 +102,29 @@ class UI:
         print('/' * 30)
 
 
+    @staticmethod
+    def display_inchiriere():
+        print("/" * 30)
+        print("Filmul a fost inchiriat cu succes!")
+        print("/" * 30)
+
+
+    @staticmethod
+    def display_client(client):
+        print("/" * 30)
+        print("Detalii despre {}:\nId:{}\nCNP:{}".format(client.getName(), client.getId(), client.getCnp()))
+        print("/" * 30)
+
+    
+    @staticmethod
+    def display_client_updated(client):
+        print('/' * 30)
+        print('Am modificat cu succes {} in lista noastra!\nDetalii {}:\nId:{}\nCnp: {}'
+        .format(client.getName(), client.getName(), str(client.getId()), client.getCnp()))
+        print('/' * 30)
+
+
+    @staticmethod
     def display_client_added(client):
         print('/' * 30)
         print('Am adaugat cu succes pe {} in sistemul nostru!\nDetalii:\nId:{}\nNume: {}\nCNP: {}'
@@ -92,7 +140,64 @@ class UI:
 
 
     @staticmethod
-    def FilmAlreadyExists(film, err):
+    def FilmAlreadyExists(err):
         print('*' * 20)
-        print('{}\n{}'.format(str(err), str(film)))
+        print('{}'.format(str(err)))
         print('*' * 20)
+
+
+    @staticmethod
+    def display_generic_error(err):
+        print('*' * 20)
+        print('{}'.format(str(err)))
+        print('*' * 20)
+
+
+    @staticmethod
+    def display_occurence_film(title, occurence):
+        print("/" * 30)
+        print('Filmul {} a fost deja inchiriat de {} ori!'.format(title, str(occurence)))
+        print("/" * 30)
+
+    
+    @staticmethod
+    def display_occurence_client(name, occurence):
+        print("/" * 30)
+        print('Clientul {} a inchiriat deja {} filme!'.format(name, str(occurence)))
+        print("/" * 30)
+
+    
+    @staticmethod
+    def display_occurence_genre(gen, occurence):
+        print("/" * 30)
+        print('Genul {} a fost deja inchiriat de {} ori!'.format(gen, str(occurence)))
+        print("/" * 30)
+
+
+    @staticmethod
+    def display_client_deleted_notification():
+        print("/" * 30)
+        print("Am sters cu succes clientul!")
+        print("/" * 30)
+
+
+    @staticmethod
+    def display_inchiriere(inchiriere):
+        print("/" * 30)
+        print('Inchiriere:\nClient:{}\nFilm:{}\nReturnat:{}'.format(inchiriere.getClient(), inchiriere.getFilm(), str(inchiriere.isReturnat())))
+        print("/" * 30)
+
+
+    @staticmethod
+    def inchiriere_returnata():
+        print("/" * 30)
+        print("Inchirierea a fost returnata cu succes!")
+        print("/" * 30)
+
+
+    @staticmethod
+    def display_all_inchirieri(listaInchirieri):
+        for inchiriere in listaInchirieri:
+            print("/" * 30)
+            print('Inchiriere:\nClient:{}\nFilm:{}\nReturnat:{}'.format(inchiriere.getClient(), inchiriere.getFilm(), str(inchiriere.isReturnat())))
+            print("/" * 30)

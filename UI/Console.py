@@ -30,6 +30,7 @@ class Console:
             '18': inchiriereService.get_clienti_ordonat_dupa_filme_inchiriate,
             '19': inchiriereService.get_primii_30perc_clienti,
             '20': inchiriereService.get_clienti_intre_medii,
+            '21': inchiriereService.sterge_inchiriere,
             'out': exit
         }
 
@@ -241,6 +242,7 @@ class Console:
     def meniu_sterge_client(self):
         id_client = input("ID-ul clientului pe care vrei sa-l stergi: ")
         self.__dict_list[self.__user_input](id_client)
+        self.__dict_list['21'](int(id_client))
         UI.display_client_deleted_notification()
         
 

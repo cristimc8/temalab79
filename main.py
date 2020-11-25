@@ -21,3 +21,6 @@ if __name__ == "__main__":
     inchirieriService = InchirieriService(inchirieriRepo, clientService, filmService)
     console = Console(clientService, filmService, inchirieriService)
     console.run()
+
+
+#Sterge inchirierea!!!!!
